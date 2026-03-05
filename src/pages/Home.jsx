@@ -25,12 +25,12 @@ function useInView(thresh = 0.12) {
     if (ref.current) o.observe(ref.current);
     return () => o.disconnect();
   }, []);
-  return [ref, v];
+  return { ref, v };
 }
 
 /* ─── FadeIn ─────────────────────────────────────────────────────────────── */
 function FadeIn({ children, delay = 0, dir = "up" }) {
-  const [ref, v] = useInView();
+  const { ref, v } = useInView();
   const from = dir === "up" ? "translateY(40px)" : dir === "left" ? "translateX(-40px)" : "translateX(40px)";
   return (
     <div ref={ref} style={{
